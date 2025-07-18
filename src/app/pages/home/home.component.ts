@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-const ROWS_HEIGHT: { [id: number]: number } = { 1: 400, 3: 335, 4: 350 };
+const ROW_HEIGHT: { [id: number]: number } = { 1: 400, 3: 335, 4: 350 };
 
 @Component({
   selector: "app-home",
@@ -8,7 +8,8 @@ const ROWS_HEIGHT: { [id: number]: number } = { 1: 400, 3: 335, 4: 350 };
 })
 export class HomeComponent implements OnInit {
   cols = 3;
-  rowHeight: number = ROWS_HEIGHT[this.cols];
+  rowHeight: number = ROW_HEIGHT[this.cols];
+  category: string | undefined;
 
   constructor() {}
 
@@ -16,6 +17,10 @@ export class HomeComponent implements OnInit {
 
   onColumnsCountChange(colsNum: number): void {
     this.cols = colsNum;
-    this.rowHeight = ROWS_HEIGHT[colsNum];
+    this.rowHeight = ROW_HEIGHT[colsNum];
+  }
+
+  onShowCategory(newCatergory: string): void {
+    this.category = newCatergory;
   }
 }
