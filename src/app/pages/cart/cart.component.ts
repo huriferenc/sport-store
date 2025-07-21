@@ -1,30 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
 import { Cart, CartItem } from "src/app/models/cart.model";
+import { CartService } from "src/app/services/cart.service";
 
 @Component({
   selector: "app-cart",
   templateUrl: "./cart.component.html",
-  styles: [],
 })
-export class CartComponent implements OnInit {
-  cart: Cart = {
-    items: [
-      {
-        product: "https://placehold.co/150",
-        name: 'Cube Aim Race MTB 29"',
-        price: 572.5,
-        quantity: 1,
-        id: 1,
-      },
-      {
-        product: "https://placehold.co/150",
-        name: "Kiprun Men's Run 500 Short",
-        price: 29.99,
-        quantity: 4,
-        id: 2,
-      },
-    ],
-  };
+export class CartComponent implements OnInit, OnDestroy {
+  cart: Cart = { items: [] };
   displayedColumns: string[] = [
     "product",
     "name",
@@ -34,24 +18,42 @@ export class CartComponent implements OnInit {
     "action",
   ];
   dataSource: CartItem[] = [];
+  cartSubscription: Subscription | undefined;
 
-  constructor() {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.dataSource = this.cart.items;
+    this.cartSubscription = this.cartService.cart.subscribe((_cart: Cart) => {
+      this.cart = _cart;
+      this.dataSource = _cart.items;
+    });
   }
 
   getTotal(items: CartItem[]): number {
-    return items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    return this.cartService.getTotal(items);
   }
 
-  onAddQuantity(item: CartItem): void {}
+  onAddQuantity(item: CartItem): void {
+    this.cartService.addToCart(item);
+  }
 
-  onRemoveQuantity(item: CartItem): void {}
+  onRemoveFromCart(item: CartItem): void {
+    this.cartService.removeFromCart(item);
+  }
 
-  onClearCart(): void {}
+  onRemoveQuantity(item: CartItem): void {
+    this.cartService.removeQuantity(item);
+  }
 
-  onRemoveFromCart(item: CartItem): void {}
+  onClearCart(): void {
+    this.cartService.clearCart();
+  }
 
   onCheckout(): void {}
+
+  ngOnDestroy() {
+    if (this.cartSubscription) {
+      this.cartSubscription.unsubscribe();
+    }
+  }
 }
