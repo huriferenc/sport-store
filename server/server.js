@@ -2,16 +2,24 @@ const express = require("express");
 const cors = require("cors");
 const bodyparser = require("body-parser");
 const dotenv = require("dotenv");
+const path = require("path");
 
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 4242;
+
 app.use(express.static("public"));
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
-app.use(cors({ origin: true, credentials: true }));
+if (process.env.NODE_ENV !== "production") {
+  app.use(cors({ origin: "http://localhost:4200", credentials: true }));
+}
 
 const stripe = require("stripe")(process.env.STRIPE_TOKEN);
+
+const origin =
+  process.env.NODE_ENV === "production" ? "" : `http://localhost:${PORT}`;
 
 app.post("/checkout", async (req, res, next) => {
   try {
@@ -76,8 +84,8 @@ app.post("/checkout", async (req, res, next) => {
         quantity: item.quantity,
       })),
       mode: "payment",
-      success_url: "http://localhost:4242/success.html",
-      cancel_url: "http://localhost:4242/cancel.html",
+      success_url: `${origin}/success.html`,
+      cancel_url: `${origin}/cancel.html`,
     });
 
     res.status(200).json(session);
@@ -86,4 +94,13 @@ app.post("/checkout", async (req, res, next) => {
   }
 });
 
-app.listen(4242, () => console.log("app is running on 4242"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client", "dist")));
+
+  // app.get('*', (req, res) => {
+  app.get("/{*any}", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
+  });
+}
+
+app.listen(PORT, () => console.log("Server is running on PORT:", PORT));
