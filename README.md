@@ -22,6 +22,8 @@ A full-stack e-commerce webshop built using Angular, Node.js, and Stripe. The ap
 
 ## 🎬 Demo
 
+You can try a live demo of the app here:  
+👉 [https://perseverance-store.onrender.com](https://perseverance-store.onrender.com)
 
 ## 📦 Installation
 
