@@ -1,27 +1,57 @@
-# GlobalStore
+# 🛒 Perseverance Global Store Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
+A full-stack e-commerce webshop built using Angular, Node.js, and Stripe. The application allows users to browse products, add items to their cart, and complete purchases using a secure Stripe checkout.
 
-## Development server
+## 🚀 Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- 🧾 Product listing with categories and filters
+- 🛍️ Add to cart & update quantities
+- 💳 Secure checkout with Stripe integration
+- 🛒 Order summary and confirmation
+- 🛠️ Admin dashboard (basic)
+- 📦 Backend product and order management (Express.js)
 
-## Code scaffolding
+## 🛠️ Technologies
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Angular** – Frontend framework
+- **TypeScript** – Strictly typed JavaScript
+- **Node.js + Express** – Backend REST API
+- **Stripe API** – Payment integration
+- **MongoDB** – (Optional) Product & order storage
+- **RxJS, Angular Forms, Angular Router** – Frontend utilities
 
-## Build
+## 🎬 Demo
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## 📦 Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 🔧 Backend
 
-## Running end-to-end tests
+```bash
+cd server
+npm install
+npm run dev
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 🌐 Frontend
 
-## Further help
+```bash
+cd client
+npm install
+npm start
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Then open `http://localhost:4200` in your browser.
+
+## 📁 Project Structure
+
+```
+/client  → Angular client  
+/server  → Node.js + Express server  
+```
+
+## 🧪 Development Tips
+
+* Use `ng generate component` for new Angular components
+* Store API keys like Stripe secret key in `.env`
+* Use `Postman` or `curl` to test backend endpoints
