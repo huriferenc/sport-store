@@ -29,6 +29,7 @@ import { CartComponent } from "./pages/cart/cart.component";
 
 import { CartService } from "./services/cart.service";
 import { StoreService } from "./services/store.service";
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { StoreService } from "./services/store.service";
     FiltersComponent,
     ProductBoxComponent,
     CartComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
