@@ -19,7 +19,9 @@ if (process.env.NODE_ENV !== "production") {
 const stripe = require("stripe")(process.env.STRIPE_TOKEN);
 
 const origin =
-  process.env.NODE_ENV === "production" ? "" : `http://localhost:${PORT}`;
+  process.env.NODE_ENV === "production"
+    ? "https://perseverance-store.onrender.com"
+    : `http://localhost:${PORT}`;
 
 app.get("/test", async (req, res, next) => {
   res.status(200).json({
