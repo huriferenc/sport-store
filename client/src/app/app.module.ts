@@ -26,6 +26,7 @@ import { ProductsHeaderComponent } from "./pages/home/components/products-header
 import { FiltersComponent } from "./pages/home/components/filters/filters.component";
 import { ProductBoxComponent } from "./pages/home/components/product-box/product-box.component";
 import { CartComponent } from "./pages/cart/cart.component";
+import { NotFoundComponent } from "./pages/not-found/not-found.component";
 
 import { CartService } from "./services/cart.service";
 import { StoreService } from "./services/store.service";
@@ -39,6 +40,7 @@ import { StoreService } from "./services/store.service";
     FiltersComponent,
     ProductBoxComponent,
     CartComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

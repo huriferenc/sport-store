@@ -23,12 +23,6 @@ const origin =
     ? "https://perseverance-store.onrender.com"
     : `http://localhost:${PORT}`;
 
-app.get("/test", async (req, res, next) => {
-  res.status(200).json({
-    text: "Hello World!",
-  });
-});
-
 app.post("/checkout", async (req, res, next) => {
   try {
     const session = await stripe.checkout.sessions.create({
@@ -105,8 +99,7 @@ app.post("/checkout", async (req, res, next) => {
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client", "dist", "client")));
 
-  // app.get('*', (req, res) => {
-  app.get("/{*any}", (req, res) => {
+  app.get("*", (req, res) => {
     res.sendFile(
       path.join(__dirname, "../client", "dist", "client", "index.html")
     );
