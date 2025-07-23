@@ -21,6 +21,12 @@ const stripe = require("stripe")(process.env.STRIPE_TOKEN);
 const origin =
   process.env.NODE_ENV === "production" ? "" : `http://localhost:${PORT}`;
 
+app.get("/test", async (req, res, next) => {
+  res.status(200).json({
+    text: "Hello World!",
+  });
+});
+
 app.post("/checkout", async (req, res, next) => {
   try {
     const session = await stripe.checkout.sessions.create({
