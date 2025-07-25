@@ -20,6 +20,8 @@ import { MatTableModule } from "@angular/material/table";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 
+import { LayoutModule } from "@angular/cdk/layout";
+
 import { HeaderComponent } from "./components/header/header.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { ProductsHeaderComponent } from "./pages/home/components/products-header/products-header.component";
@@ -30,6 +32,7 @@ import { NotFoundComponent } from "./pages/not-found/not-found.component";
 
 import { CartService } from "./services/cart.service";
 import { StoreService } from "./services/store.service";
+import { DrawerService } from "./services/drawer.service";
 
 @NgModule({
   declarations: [
@@ -60,8 +63,9 @@ import { StoreService } from "./services/store.service";
     MatTableModule,
     MatBadgeModule,
     MatSnackBarModule,
+    LayoutModule,
   ],
-  providers: [CartService, StoreService],
+  providers: [CartService, StoreService, DrawerService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

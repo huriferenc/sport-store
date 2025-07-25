@@ -1,4 +1,12 @@
 <mat-toolbar class="justify-between max-w-7xl mx-auto border-x">
+  <button
+    *ngIf="isHandset$ | async"
+    mat-icon-button
+    (click)="toggleDrawer()"
+    aria-label="Toggle navigation menu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
   <a routerLink="home">Perseverance Global Store</a>
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon
